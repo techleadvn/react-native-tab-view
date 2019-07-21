@@ -363,11 +363,12 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
     if (this.props.scrollEnabled) {
       global.cancelAnimationFrame(this._scrollResetCallback);
       this._scrollResetCallback = global.requestAnimationFrame(() => {
-        this._scrollView &&
-          this._scrollView.scrollTo({
-            x: this._getScrollAmount(this.props, value),
-            animated,
-          });
+        this._scrollView 
+         // &&
+         // this._scrollView.scrollTo({
+         //   x: this._getScrollAmount(this.props, value),
+         //   animated,
+         // });
       });
     }
   };
