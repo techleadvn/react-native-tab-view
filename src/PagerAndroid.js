@@ -88,7 +88,7 @@ export default class PagerAndroid<T: *> extends React.Component<Props<T>> {
   };
 
   _handlePageScrollStateChanged = (e: PageScrollState) => {
-    this._isIdle = e === 'idle';
+    this._isIdle = e.nativeEvent.pageScrollState === 'idle';
 
     let nextIndex = this._currentIndex;
 
