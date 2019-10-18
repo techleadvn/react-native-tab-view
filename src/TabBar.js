@@ -23,6 +23,7 @@ type IndicatorProps<T> = SceneRendererProps<T> & {
 
 type Props<T> = SceneRendererProps<T> & {
   isAutoSizeIndicator?: boolean,
+  enableAnimated: boolean,
   scrollEnabled?: boolean,
   bounces?: boolean,
   pressColor?: string,
@@ -56,6 +57,7 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
   static propTypes = {
     ...SceneRendererPropType,
     isAutoSizeIndicator: PropTypes.bool,
+    enableAnimated: PropTypes.bool,
     offsetWidth: PropTypes.number,
     scrollEnabled: PropTypes.bool,
     bounces: PropTypes.bool,
@@ -352,7 +354,7 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
             this.props,
             this._getScrollAmount(this.props, value)
           ),
-          animated: !this._isIntial, // Disable animation for the initial render
+          animated: this.props.enableAnimated, // Disable animation for the initial render
         });
 
       this._isIntial = false;
