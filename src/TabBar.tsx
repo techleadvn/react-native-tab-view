@@ -256,6 +256,7 @@ export default class TabBar<T extends Route> extends React.Component<
 
   private resetScroll = (index: number) => {
     if (this.props.scrollEnabled) {
+      console.log('On scroll to', index);
       cancelAnimationFrame(this._scrollResetCallback);
       this._scrollResetCallback = requestAnimationFrame(() => {
         this.scrollView &&
