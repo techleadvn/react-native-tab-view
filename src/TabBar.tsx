@@ -26,6 +26,7 @@ import {
 export type Props<T extends Route> = SceneRendererProps & {
   navigationState: NavigationState<T>;
   scrollEnabled?: boolean;
+  enableAnimated?: boolean;
   bounces?: boolean;
   activeColor?: string;
   inactiveColor?: string;
@@ -89,6 +90,8 @@ export default class TabBar<T extends Route> extends React.Component<
     layout: { width: 0, height: 0 },
     tabWidths: {},
   };
+
+  _scrollResetCallback: any = null;
 
   componentDidUpdate(prevProps: Props<T>, prevState: State) {
     const { navigationState } = this.props;
@@ -253,11 +256,14 @@ export default class TabBar<T extends Route> extends React.Component<
 
   private resetScroll = (index: number) => {
     if (this.props.scrollEnabled) {
-      this.scrollView &&
+      cancelAnimationFrame(this._scrollResetCallback);
+      this._scrollResetCallback = requestAnimationFrame(() => {
+        this.scrollView &&
         this.scrollView.scrollTo({
           x: this.getScrollAmount(this.props, this.state, index),
-          animated: true,
+          animated: this.props.enableAnimated,
         });
+      });
     }
   };
 
